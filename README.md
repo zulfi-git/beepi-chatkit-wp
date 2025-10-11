@@ -6,6 +6,16 @@ A WordPress plugin for embedding an OpenAI ChatKit agent on WordPress pages usin
 
 This plugin allows you to easily embed a ChatKit-powered chat interface on your WordPress site. It connects to your Cloudflare Worker endpoints for secure token generation and refresh, ensuring seamless authentication with the OpenAI ChatKit service.
 
+**New in v1.2.0:** Easy-to-use admin interface for configuration. No more manual file editing required!
+
+## Quick Start
+
+1. Install and activate the plugin
+2. Go to **Settings > Beepi ChatKit** in WordPress admin
+3. Enter your ChatKit Workflow ID from OpenAI
+4. Add the `[chatkit]` shortcode to any page or post
+5. Your ChatKit chat interface is ready!
+
 ## Features
 
 - Easy integration via `[chatkit]` shortcode
@@ -82,9 +92,11 @@ The ChatKit initialization logic is in `assets/js/chatkit-init.js`. This file ha
 
 ## Documentation
 
+- **[CHANGELOG.md](./CHANGELOG.md)** - Complete version history and changes
 - **[ASSESSMENT.md](./ASSESSMENT.md)** - Comprehensive codebase assessment and improvement roadmap
 - **[ASSESSMENT-SUMMARY.md](./ASSESSMENT-SUMMARY.md)** - Quick reference for assessment findings
 - **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Guidelines for contributing to the project
+- **[TESTING.md](./TESTING.md)** - Guide for running tests
 
 ## License
 
