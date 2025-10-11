@@ -116,7 +116,7 @@
 			});
 			
 			// Mount the ChatKit widget
-			chatkit.mount();
+			chatkit.mount(container);
 
 			console.log('Beepi ChatKit: Initialized successfully.');
 		} catch (error) {
