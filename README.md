@@ -8,30 +8,31 @@ This plugin allows you to easily embed a ChatKit-powered chat interface on your 
 
 ## Features
 
-- 🚀 Easy integration via `[chatkit]` shortcode
-- 🔒 Secure token management through Cloudflare Worker endpoints
-- 📱 Responsive design with mobile support
-- ⚡ Conditional script loading (only loads on pages using the shortcode)
-- 🎨 Customizable styling with included CSS
-- 🔧 Minimal configuration required
+- Easy integration via `[chatkit]` shortcode
+- Admin UI for configuration (no file editing required)
+- Secure token management through Cloudflare Worker endpoints
+- Responsive design with mobile support
+- Conditional script loading (only loads on pages using the shortcode)
+- Customizable styling with included CSS
+- Minimal configuration required
 
 ## Installation
 
 1. Upload the `beepi-chatkit-wp` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Configure the `CHATKIT_WORKFLOW_ID` constant in `beepi-chatkit-embed.php` with your ChatKit workflow ID
+3. Go to Settings > Beepi ChatKit to configure your ChatKit workflow ID and endpoints
 
 ## Configuration
 
-Open `beepi-chatkit-embed.php` and locate the configuration constants near the top of the file:
+After activating the plugin, navigate to **Settings > Beepi ChatKit** in your WordPress admin panel.
 
-```php
-define( 'CHATKIT_START_URL', 'https://chatkit.beepi.no/api/chatkit/start' );
-define( 'CHATKIT_REFRESH_URL', 'https://chatkit.beepi.no/api/chatkit/refresh' );
-define( 'CHATKIT_WORKFLOW_ID', '' ); // Add your workflow ID here
-```
+Configure the following settings:
 
-Update the `CHATKIT_WORKFLOW_ID` with your actual ChatKit workflow ID.
+- **Workflow ID**: Your ChatKit workflow ID from OpenAI (required)
+- **Start URL**: Cloudflare Worker endpoint for token generation (default: `https://chatkit.beepi.no/api/chatkit/start`)
+- **Refresh URL**: Cloudflare Worker endpoint for token refresh (default: `https://chatkit.beepi.no/api/chatkit/refresh`)
+
+All settings are stored securely in the WordPress database.
 
 ## Usage
 
@@ -48,11 +49,14 @@ The chat interface will appear where you place the shortcode.
 ```
 beepi-chatkit-wp/
 ├── beepi-chatkit-embed.php    # Main plugin file
+├── includes/
+│   └── admin-settings.php     # Admin settings page
 ├── assets/
 │   ├── js/
 │   │   └── chatkit-init.js    # JavaScript initialization
 │   └── css/
 │       └── chatkit.css        # Optional styling
+├── uninstall.php              # Cleanup on uninstall
 └── README.md
 ```
 
@@ -99,7 +103,8 @@ You should have received a copy of the GNU General Public License along with thi
    - Check the page source to verify the `chatkit-container` div is present
 
 2. **Verify configuration:**
-   - Open `beepi-chatkit-embed.php` and ensure `CHATKIT_WORKFLOW_ID` is set
+   - Go to Settings > Beepi ChatKit in WordPress admin
+   - Ensure Workflow ID is set
    - Verify the Cloudflare Worker URLs are correct
 
 3. **Check browser console:**
@@ -171,17 +176,28 @@ For issues and questions:
 
 ## Changelog
 
-### 1.2.0 (Assessment & Documentation Update)
-- ✅ Comprehensive codebase assessment completed
-- ✅ Added phased work packages for future improvements
-- ✅ Enhanced documentation with troubleshooting guide
-- ✅ Added development configuration files (.editorconfig, .gitattributes, .gitignore)
-- ✅ Added CONTRIBUTING.md for contributors
-- ✅ Improved JSDoc comments in JavaScript
-- ✅ Added ASSESSMENT.md with detailed quality analysis
-- ✅ Added ASSESSMENT-SUMMARY.md for quick reference
+### 1.2.0 (2025-10-11)
+- Added WordPress admin settings page for easy configuration
+- No more manual file editing required
+- Configuration now stored in WordPress database
+- Added activation and uninstall hooks for proper setup/cleanup
+- Added settings link on plugins page
+- Improved security with proper input sanitization
+- Updated documentation with new configuration method
+- Removed emojis from changelog and features
+- Version bump to 1.2.0
 
-### 1.1.0
+### 1.1.0 (Assessment and Documentation Update)
+- Comprehensive codebase assessment completed
+- Added phased work packages for future improvements
+- Enhanced documentation with troubleshooting guide
+- Added development configuration files (.editorconfig, .gitattributes, .gitignore)
+- Added CONTRIBUTING.md for contributors
+- Improved JSDoc comments in JavaScript
+- Added ASSESSMENT.md with detailed quality analysis
+- Added ASSESSMENT-SUMMARY.md for quick reference
+
+### 1.1.0 (OpenAI ChatKit Update)
 - Updated to follow official OpenAI ChatKit embedding guide
 - Changed from tokenProvider pattern to api.getClientSecret pattern
 - Updated API integration to use client_secret instead of token

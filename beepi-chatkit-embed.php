@@ -3,7 +3,7 @@
  * Plugin Name: Beepi ChatKit Embed
  * Plugin URI: https://github.com/zulfi-git/beepi-chatkit-wp
  * Description: Embeds an OpenAI ChatKit agent on WordPress pages using Cloudflare Worker endpoints for token generation.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: Beepi
  * Author URI: https://beepi.no
  * License: GPLv3
@@ -36,11 +36,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Configuration constants for ChatKit integration.
+ * Get plugin option with fallback to default value.
+ *
+ * @param string $key     Option key.
+ * @param string $default Default value if option is not set.
+ * @return string Option value or default.
  */
-define( 'CHATKIT_START_URL', 'https://chatkit.beepi.no/api/chatkit/start' );
-define( 'CHATKIT_REFRESH_URL', 'https://chatkit.beepi.no/api/chatkit/refresh' );
-define( 'CHATKIT_WORKFLOW_ID', '' ); // Placeholder - to be filled in later.
+function beepi_chatkit_get_option( $key, $default = '' ) {
+	$options = get_option( 'beepi_chatkit_options', array() );
+	return isset( $options[ $key ] ) ? $options[ $key ] : $default;
+}
+
+/**
+ * Plugin activation hook.
+ */
+function beepi_chatkit_activate() {
+	// Set default options only if they don't exist.
+	if ( false === get_option( 'beepi_chatkit_options' ) ) {
+		$default_options = array(
+			'start_url'   => 'https://chatkit.beepi.no/api/chatkit/start',
+			'refresh_url' => 'https://chatkit.beepi.no/api/chatkit/refresh',
+			'workflow_id' => '',
+		);
+		add_option( 'beepi_chatkit_options', $default_options );
+	}
+}
+register_activation_hook( __FILE__, 'beepi_chatkit_activate' );
+
+/**
+ * Include admin settings if in admin area.
+ */
+if ( is_admin() ) {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/admin-settings.php';
+	Beepi_ChatKit_Settings::init();
+}
 
 /**
  * Main plugin class for Beepi ChatKit Embed.
@@ -120,7 +149,7 @@ class Beepi_ChatKit_Embed {
 			'beepi-chatkit-init',
 			plugins_url( 'assets/js/chatkit-init.js', __FILE__ ),
 			array( 'openai-chatkit' ),
-			'1.1.0',
+			'1.2.0',
 			true
 		);
 
@@ -129,9 +158,9 @@ class Beepi_ChatKit_Embed {
 			'beepi-chatkit-init',
 			'beepichatKitConfig',
 			array(
-				'startUrl'    => CHATKIT_START_URL,
-				'refreshUrl'  => CHATKIT_REFRESH_URL,
-				'workflowId'  => CHATKIT_WORKFLOW_ID,
+				'startUrl'   => beepi_chatkit_get_option( 'start_url', 'https://chatkit.beepi.no/api/chatkit/start' ),
+				'refreshUrl' => beepi_chatkit_get_option( 'refresh_url', 'https://chatkit.beepi.no/api/chatkit/refresh' ),
+				'workflowId' => beepi_chatkit_get_option( 'workflow_id', '' ),
 			)
 		);
 
@@ -140,7 +169,7 @@ class Beepi_ChatKit_Embed {
 			'beepi-chatkit-style',
 			plugins_url( 'assets/css/chatkit.css', __FILE__ ),
 			array(),
-			'1.1.0'
+			'1.2.0'
 		);
 	}
 }
