@@ -1,6 +1,6 @@
 # Quick Assessment Summary
 
-**Plugin:** Beepi ChatKit Embed v1.2.0  
+**Plugin:** Beepi ChatKit Embed v1.3.0  
 **Assessment Date:** October 2025  
 **Last Updated:** October 11, 2025  
 **Overall Grade:** A- (Excellent)

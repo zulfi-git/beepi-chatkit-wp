@@ -5,6 +5,21 @@ All notable changes to the Beepi ChatKit Embed plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2025-10-11
+
+### Added
+- Created `/docs` directory for better documentation organization
+
+### Changed
+- Moved assessment documents to `/docs` folder (ASSESSMENT.md, ASSESSMENT-SUMMARY.md, IMPLEMENTATION-GUIDE.md)
+- Updated documentation references to reflect new structure
+- Consolidated and removed redundant REVIEW-CHECKLIST.md
+- Streamlined documentation for one-person project (removed fluff)
+
+### Improved
+- Documentation organization and discoverability
+- Reduced documentation redundancy
+
 ## [1.2.0] - 2025-10-11
 
 ### Added

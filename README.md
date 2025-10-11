@@ -6,7 +6,7 @@ A WordPress plugin for embedding an OpenAI ChatKit agent on WordPress pages usin
 
 This plugin allows you to easily embed a ChatKit-powered chat interface on your WordPress site. It connects to your Cloudflare Worker endpoints for secure token generation and refresh, ensuring seamless authentication with the OpenAI ChatKit service.
 
-**New in v1.2.0:** Easy-to-use admin interface for configuration. No more manual file editing required!
+**New in v1.3.0:** Improved documentation organization with dedicated docs folder.
 
 ## Quick Start
 
@@ -93,10 +93,14 @@ The ChatKit initialization logic is in `assets/js/chatkit-init.js`. This file ha
 ## Documentation
 
 - **[CHANGELOG.md](./CHANGELOG.md)** - Complete version history and changes
-- **[ASSESSMENT.md](./ASSESSMENT.md)** - Comprehensive codebase assessment and improvement roadmap
-- **[ASSESSMENT-SUMMARY.md](./ASSESSMENT-SUMMARY.md)** - Quick reference for assessment findings
-- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Guidelines for contributing to the project
 - **[TESTING.md](./TESTING.md)** - Guide for running tests
+- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Guidelines for contributing to the project
+
+### Technical Documentation
+
+- **[docs/ASSESSMENT.md](./docs/ASSESSMENT.md)** - Comprehensive codebase assessment and improvement roadmap
+- **[docs/ASSESSMENT-SUMMARY.md](./docs/ASSESSMENT-SUMMARY.md)** - Quick reference for assessment findings
+- **[docs/IMPLEMENTATION-GUIDE.md](./docs/IMPLEMENTATION-GUIDE.md)** - Implementation guide for planned improvements
 
 ## License
 
@@ -178,7 +182,7 @@ This is a private project and not open source.
 
 For issues and questions:
 - Check the [Troubleshooting](#troubleshooting) section above
-- Review the [ASSESSMENT.md](./ASSESSMENT.md) for known limitations
+- Review [docs/ASSESSMENT.md](./docs/ASSESSMENT.md) for known limitations
 - Open an issue on the GitHub repository with:
   - WordPress version
   - PHP version
@@ -187,6 +191,13 @@ For issues and questions:
   - Steps to reproduce
 
 ## Changelog
+
+### 1.3.0 (2025-10-11)
+- Created `/docs` directory for better documentation organization
+- Moved assessment documents to `/docs` folder for cleaner root directory
+- Consolidated and streamlined documentation (removed redundant files)
+- Updated all documentation references
+- Version bump to 1.3.0
 
 ### 1.2.0 (2025-10-11)
 - Added WordPress admin settings page for easy configuration
