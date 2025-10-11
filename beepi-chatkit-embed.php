@@ -68,7 +68,9 @@ register_activation_hook( __FILE__, 'beepi_chatkit_activate' );
  */
 if ( is_admin() ) {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/admin-settings.php';
-	Beepi_ChatKit_Settings::init();
+	if ( class_exists( 'Beepi_ChatKit_Settings' ) ) {
+		Beepi_ChatKit_Settings::init();
+	}
 }
 
 /**
