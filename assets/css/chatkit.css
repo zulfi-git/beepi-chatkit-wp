@@ -1,0 +1,47 @@
+/**
+ * Beepi ChatKit Embed - Styles
+ *
+ * Optional CSS for layout adjustments and customization of the ChatKit container.
+ *
+ * @package Beepi_ChatKit_Embed
+ * @license GPL-3.0-or-later
+ *
+ * Copyright (C) 2025 Beepi
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ */
+
+/**
+ * ChatKit container styling.
+ */
+#chatkit-container {
+	width: 100%;
+	max-width: 800px;
+	min-height: 400px;
+	margin: 20px auto;
+	padding: 0;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	background-color: #ffffff;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/**
+ * Responsive adjustments for smaller screens.
+ */
+@media (max-width: 768px) {
+	#chatkit-container {
+		max-width: 100%;
+		min-height: 300px;
+		margin: 10px;
+		border-radius: 4px;
+	}
+}
