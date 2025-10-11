@@ -32,6 +32,13 @@
 
 	/**
 	 * Initialize the ChatKit instance.
+	 * 
+	 * This function sets up the ChatKit interface by:
+	 * 1. Validating configuration and DOM elements
+	 * 2. Configuring the ChatKit API with client secret handlers
+	 * 3. Setting up token generation and refresh mechanisms
+	 * 
+	 * @returns {void}
 	 */
 	function initChatKit() {
 		// Ensure the configuration object exists.
@@ -51,6 +58,14 @@
 		try {
 			chatkit.setOptions({
 				api: {
+					/**
+					 * Get or refresh client secret for ChatKit API authentication.
+					 * Follows the official OpenAI ChatKit pattern for token management.
+					 * 
+					 * @param {string|null} currentClientSecret - Current client secret if refreshing, null for initial request
+					 * @returns {Promise<string>} New client secret
+					 * @throws {Error} If API request fails
+					 */
 					getClientSecret: async function(currentClientSecret) {
 						try {
 							if (!currentClientSecret) {
