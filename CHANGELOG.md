@@ -7,12 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Removed uptime field from health endpoint response (not meaningful in stateless serverless context)
+- Updated health status display to show only status and version
+- Removed `formatUptime()` function from admin JavaScript
+
 ### Added
 - Worker health status display in admin settings page
 - Real-time health monitoring with AJAX refresh
 - Health status endpoint support (`/api/health`)
 - Visual indicators for worker status (OK/Error)
-- Uptime and version information display
+- Version information display
 - Refresh button for manual health checks
 - New admin JavaScript (`admin-health.js`) for AJAX functionality
 - New admin CSS (`admin-health.css`) for health status styling
