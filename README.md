@@ -90,6 +90,12 @@ For issues and questions, please open an issue on the GitHub repository.
 
 ## Changelog
 
+### 1.1.0
+- Updated to follow official OpenAI ChatKit embedding guide
+- Changed from tokenProvider pattern to api.getClientSecret pattern
+- Updated API integration to use client_secret instead of token
+- Improved compatibility with OpenAI's recommended implementation
+
 ### 1.0.0
 - Initial release
 - Shortcode support for embedding ChatKit

@@ -41,68 +41,53 @@
 		}
 
 		// Ensure the container element exists.
-		const container = document.getElementById('chatkit-container');
-		if (!container) {
+		const chatkit = document.getElementById('chatkit-container');
+		if (!chatkit) {
 			console.error('Beepi ChatKit: Container element not found.');
 			return;
 		}
 
-		// Ensure ChatKit library is loaded.
-		if (typeof window.ChatKit === 'undefined') {
-			console.error('Beepi ChatKit: ChatKit library not loaded.');
-			return;
-		}
-
-		// Initialize ChatKit with configuration.
+		// Initialize ChatKit with configuration using the official OpenAI pattern.
 		try {
-			window.ChatKit.init({
-				container: container,
-				workflowId: beepichatKitConfig.workflowId,
-				tokenProvider: {
-					// Function to get initial token from Cloudflare Worker.
-					getToken: async function() {
+			chatkit.setOptions({
+				api: {
+					getClientSecret: async function(currentClientSecret) {
 						try {
-							const response = await fetch(beepichatKitConfig.startUrl, {
-								method: 'POST',
-								headers: {
-									'Content-Type': 'application/json'
+							if (!currentClientSecret) {
+								// Get initial client secret.
+								const res = await fetch(beepichatKitConfig.startUrl, { 
+									method: 'POST' 
+								});
+								
+								if (!res.ok) {
+									throw new Error('Failed to get client secret: ' + res.status);
 								}
-							});
-
-							if (!response.ok) {
-								throw new Error('Failed to get token: ' + response.status);
+								
+								const {client_secret} = await res.json();
+								return client_secret;
 							}
-
-							const data = await response.json();
-							return data.token;
-						} catch (error) {
-							console.error('Beepi ChatKit: Error getting token:', error);
-							throw error;
-						}
-					},
-					// Function to refresh token from Cloudflare Worker.
-					refreshToken: async function(oldToken) {
-						try {
-							const response = await fetch(beepichatKitConfig.refreshUrl, {
+							
+							// Refresh client secret.
+							const res = await fetch(beepichatKitConfig.refreshUrl, {
 								method: 'POST',
+								body: JSON.stringify({ currentClientSecret }),
 								headers: {
-									'Content-Type': 'application/json'
+									'Content-Type': 'application/json',
 								},
-								body: JSON.stringify({ token: oldToken })
 							});
-
-							if (!response.ok) {
-								throw new Error('Failed to refresh token: ' + response.status);
+							
+							if (!res.ok) {
+								throw new Error('Failed to refresh client secret: ' + res.status);
 							}
-
-							const data = await response.json();
-							return data.token;
+							
+							const {client_secret} = await res.json();
+							return client_secret;
 						} catch (error) {
-							console.error('Beepi ChatKit: Error refreshing token:', error);
+							console.error('Beepi ChatKit: Error with client secret:', error);
 							throw error;
 						}
 					}
-				}
+				},
 			});
 
 			console.log('Beepi ChatKit: Initialized successfully.');
