@@ -62,7 +62,11 @@
 
 		// Initialize ChatKit with configuration using the official OpenAI pattern.
 		try {
-			window.ChatKit.setOptions({
+			// Create a ChatKit instance
+			const chatkit = window.ChatKit.create();
+			
+			// Configure the instance
+			chatkit.setOptions({
 				api: {
 					/**
 					 * Get or refresh client secret for ChatKit API authentication.
@@ -110,6 +114,9 @@
 					}
 				},
 			});
+			
+			// Mount the ChatKit widget
+			chatkit.mount();
 
 			console.log('Beepi ChatKit: Initialized successfully.');
 		} catch (error) {
