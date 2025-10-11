@@ -20,6 +20,7 @@ This plugin allows you to easily embed a ChatKit-powered chat interface on your 
 
 - Easy integration via `[chatkit]` shortcode
 - Admin UI for configuration (no file editing required)
+- Real-time health monitoring of Cloudflare Worker service
 - Secure token management through Cloudflare Worker endpoints
 - Responsive design with mobile support
 - Conditional script loading (only loads on pages using the shortcode)
@@ -35,6 +36,17 @@ This plugin allows you to easily embed a ChatKit-powered chat interface on your 
 ## Configuration
 
 After activating the plugin, navigate to **Settings > Beepi ChatKit** in your WordPress admin panel.
+
+### Health Status
+
+At the top of the settings page, you'll see the Worker Health Status section displaying:
+- **Status**: Current operational status (ok/error)
+- **Uptime**: How long the worker has been running
+- **Version**: Current worker version
+
+Click "Refresh Status" to update the health information in real-time.
+
+### Settings
 
 Configure the following settings:
 
@@ -63,9 +75,12 @@ beepi-chatkit-wp/
 │   └── admin-settings.php     # Admin settings page
 ├── assets/
 │   ├── js/
-│   │   └── chatkit-init.js    # JavaScript initialization
+│   │   ├── chatkit-init.js    # JavaScript initialization
+│   │   └── admin-health.js    # Admin health status AJAX
 │   └── css/
-│       └── chatkit.css        # Optional styling
+│       ├── chatkit.css        # Optional styling
+│       └── admin-health.css   # Admin health status styles
+├── tests/                     # PHPUnit tests
 ├── uninstall.php              # Cleanup on uninstall
 └── README.md
 ```

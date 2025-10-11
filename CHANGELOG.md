@@ -5,6 +5,24 @@ All notable changes to the Beepi ChatKit Embed plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- Worker health status display in admin settings page
+- Real-time health monitoring with AJAX refresh
+- Health status endpoint support (`/api/health`)
+- Visual indicators for worker status (OK/Error)
+- Uptime and version information display
+- Refresh button for manual health checks
+- New admin JavaScript (`admin-health.js`) for AJAX functionality
+- New admin CSS (`admin-health.css`) for health status styling
+- AJAX handler with security nonce validation
+- Health check function using WordPress HTTP API
+
+### Security
+- AJAX requests protected with WordPress nonce verification
+- Capability checks for admin-only health status access
+
 ## [1.3.0] - 2025-10-11
 
 ### Added

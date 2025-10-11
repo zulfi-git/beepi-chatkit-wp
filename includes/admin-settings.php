@@ -22,6 +22,7 @@ public static function init() {
 add_action( 'admin_menu', array( __CLASS__, 'add_settings_page' ) );
 add_action( 'admin_init', array( __CLASS__, 'register_settings' ) );
 add_filter( 'plugin_action_links_' . plugin_basename( dirname( __DIR__ ) . '/beepi-chatkit-embed.php' ), array( __CLASS__, 'add_settings_link' ) );
+add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_admin_assets' ) );
 }
 
 /**
@@ -47,6 +48,45 @@ public static function add_settings_link( $links ) {
 $settings_link = '<a href="' . esc_url( admin_url( 'options-general.php?page=beepi-chatkit-settings' ) ) . '">Settings</a>';
 array_unshift( $links, $settings_link );
 return $links;
+}
+
+/**
+ * Enqueue admin assets for the settings page.
+ *
+ * @param string $hook_suffix The current admin page hook suffix.
+ */
+public static function enqueue_admin_assets( $hook_suffix ) {
+// Only load on our settings page.
+if ( 'settings_page_beepi-chatkit-settings' !== $hook_suffix ) {
+return;
+}
+
+// Enqueue admin JavaScript.
+wp_enqueue_script(
+'beepi-chatkit-admin',
+plugins_url( 'assets/js/admin-health.js', dirname( __FILE__ ) ),
+array( 'jquery' ),
+'1.3.0',
+true
+);
+
+// Pass AJAX URL and nonce to JavaScript.
+wp_localize_script(
+'beepi-chatkit-admin',
+'beepichatKitAdmin',
+array(
+'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+'nonce'   => wp_create_nonce( 'beepi_chatkit_health_nonce' ),
+)
+);
+
+// Enqueue admin CSS.
+wp_enqueue_style(
+'beepi-chatkit-admin',
+plugins_url( 'assets/css/admin-health.css', dirname( __FILE__ ) ),
+array(),
+'1.3.0'
+);
 }
 
 /**
@@ -162,6 +202,16 @@ wp_die( esc_html__( 'You do not have sufficient permissions to access this page.
 ?>
 <div class="wrap">
 <h1>Beepi ChatKit Settings</h1>
+
+<!-- Health Status Section -->
+<div class="beepi-chatkit-health-section">
+<h2>Worker Health Status</h2>
+<div id="beepi-chatkit-health-status" class="beepi-health-container">
+<p class="beepi-health-loading">Checking health status...</p>
+</div>
+<button type="button" id="beepi-chatkit-refresh-health" class="button">Refresh Status</button>
+</div>
+
 <form method="post" action="options.php">
 <?php
 settings_fields( 'beepi_chatkit_settings' );

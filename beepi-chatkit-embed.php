@@ -40,6 +40,82 @@ function beepi_chatkit_get_option( $key, $default = '' ) {
 }
 
 /**
+ * Fetch health status from Cloudflare Worker.
+ *
+ * @return array Health status data with keys: success, status, uptime, version, error.
+ */
+function beepi_chatkit_get_health_status() {
+	// Get the base URL from start_url by extracting the domain.
+	$start_url = beepi_chatkit_get_option( 'start_url', Beepi_ChatKit_Embed::DEFAULT_START_URL );
+	
+	// Parse the URL to get the base.
+	$parsed_url = wp_parse_url( $start_url );
+	if ( ! $parsed_url || ! isset( $parsed_url['scheme'] ) || ! isset( $parsed_url['host'] ) ) {
+		return array(
+			'success' => false,
+			'error'   => 'Invalid start URL configuration',
+		);
+	}
+	
+	// Construct health URL using the same base as start_url.
+	$health_url = $parsed_url['scheme'] . '://' . $parsed_url['host'] . '/api/health';
+	
+	// Fetch health status.
+	$response = wp_remote_get(
+		$health_url,
+		array(
+			'timeout' => 5,
+			'headers' => array(
+				'Accept' => 'application/json',
+			),
+		)
+	);
+	
+	// Check for errors.
+	if ( is_wp_error( $response ) ) {
+		return array(
+			'success' => false,
+			'error'   => $response->get_error_message(),
+		);
+	}
+	
+	// Get response code.
+	$response_code = wp_remote_retrieve_response_code( $response );
+	if ( 200 !== $response_code ) {
+		return array(
+			'success' => false,
+			'error'   => sprintf( 'HTTP %d: Unable to fetch health status', $response_code ),
+		);
+	}
+	
+	// Parse JSON response.
+	$body = wp_remote_retrieve_body( $response );
+	$data = json_decode( $body, true );
+	
+	if ( json_last_error() !== JSON_ERROR_NONE ) {
+		return array(
+			'success' => false,
+			'error'   => 'Invalid JSON response from health endpoint',
+		);
+	}
+	
+	// Validate required fields.
+	if ( ! isset( $data['status'] ) ) {
+		return array(
+			'success' => false,
+			'error'   => 'Missing status field in health response',
+		);
+	}
+	
+	return array(
+		'success' => true,
+		'status'  => isset( $data['status'] ) ? sanitize_text_field( $data['status'] ) : '',
+		'uptime'  => isset( $data['uptime'] ) ? absint( $data['uptime'] ) : 0,
+		'version' => isset( $data['version'] ) ? sanitize_text_field( $data['version'] ) : '',
+	);
+}
+
+/**
  * Plugin activation hook.
  */
 function beepi_chatkit_activate() {
@@ -63,6 +139,32 @@ if ( is_admin() ) {
 	if ( class_exists( 'Beepi_ChatKit_Settings' ) ) {
 		Beepi_ChatKit_Settings::init();
 	}
+	
+	// Add AJAX handler for health status check.
+	add_action( 'wp_ajax_beepi_chatkit_health_check', 'beepi_chatkit_ajax_health_check' );
+}
+
+/**
+ * AJAX handler for health status check.
+ */
+function beepi_chatkit_ajax_health_check() {
+	// Check nonce for security.
+	check_ajax_referer( 'beepi_chatkit_health_nonce', 'nonce' );
+	
+	// Check permissions.
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( array( 'message' => 'Insufficient permissions' ) );
+		return;
+	}
+	
+	// Get health status.
+	$health = beepi_chatkit_get_health_status();
+	
+	if ( $health['success'] ) {
+		wp_send_json_success( $health );
+	} else {
+		wp_send_json_error( $health );
+	}
 }
 
 /**
@@ -83,6 +185,13 @@ class Beepi_ChatKit_Embed {
 	 * @var string
 	 */
 	const DEFAULT_REFRESH_URL = 'https://chatkit.beepi.no/api/chatkit/refresh';
+
+	/**
+	 * Default URL for ChatKit health check endpoint.
+	 *
+	 * @var string
+	 */
+	const DEFAULT_HEALTH_URL = 'https://chatkit.beepi.no/api/health';
 
 	/**
 	 * Track whether the shortcode is used on the current page.
