@@ -54,8 +54,8 @@ function beepi_chatkit_activate() {
 	// Set default options only if they don't exist.
 	if ( false === get_option( 'beepi_chatkit_options' ) ) {
 		$default_options = array(
-			'start_url'   => 'https://chatkit.beepi.no/api/chatkit/start',
-			'refresh_url' => 'https://chatkit.beepi.no/api/chatkit/refresh',
+			'start_url'   => Beepi_ChatKit_Embed::DEFAULT_START_URL,
+			'refresh_url' => Beepi_ChatKit_Embed::DEFAULT_REFRESH_URL,
 			'workflow_id' => '',
 		);
 		add_option( 'beepi_chatkit_options', $default_options );
@@ -77,6 +77,20 @@ if ( is_admin() ) {
  * Main plugin class for Beepi ChatKit Embed.
  */
 class Beepi_ChatKit_Embed {
+
+	/**
+	 * Default URL for ChatKit start endpoint.
+	 *
+	 * @var string
+	 */
+	const DEFAULT_START_URL = 'https://chatkit.beepi.no/api/chatkit/start';
+
+	/**
+	 * Default URL for ChatKit refresh endpoint.
+	 *
+	 * @var string
+	 */
+	const DEFAULT_REFRESH_URL = 'https://chatkit.beepi.no/api/chatkit/refresh';
 
 	/**
 	 * Track whether the shortcode is used on the current page.
@@ -160,8 +174,8 @@ class Beepi_ChatKit_Embed {
 			'beepi-chatkit-init',
 			'beepichatKitConfig',
 			array(
-				'startUrl'   => beepi_chatkit_get_option( 'start_url', 'https://chatkit.beepi.no/api/chatkit/start' ),
-				'refreshUrl' => beepi_chatkit_get_option( 'refresh_url', 'https://chatkit.beepi.no/api/chatkit/refresh' ),
+				'startUrl'   => beepi_chatkit_get_option( 'start_url', self::DEFAULT_START_URL ),
+				'refreshUrl' => beepi_chatkit_get_option( 'refresh_url', self::DEFAULT_REFRESH_URL ),
 				'workflowId' => beepi_chatkit_get_option( 'workflow_id', '' ),
 			)
 		);

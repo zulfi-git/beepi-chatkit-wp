@@ -113,7 +113,7 @@ echo '<p class="description">Your ChatKit workflow ID from OpenAI</p>';
  */
 public static function start_url_callback() {
 $options = get_option( 'beepi_chatkit_options' );
-$value   = isset( $options['start_url'] ) ? $options['start_url'] : 'https://chatkit.beepi.no/api/chatkit/start';
+$value   = isset( $options['start_url'] ) ? $options['start_url'] : Beepi_ChatKit_Embed::DEFAULT_START_URL;
 echo '<input type="url" name="beepi_chatkit_options[start_url]" value="' . esc_attr( $value ) . '" class="regular-text" />';
 echo '<p class="description">Cloudflare Worker endpoint for token generation</p>';
 }
@@ -123,7 +123,7 @@ echo '<p class="description">Cloudflare Worker endpoint for token generation</p>
  */
 public static function refresh_url_callback() {
 $options = get_option( 'beepi_chatkit_options' );
-$value   = isset( $options['refresh_url'] ) ? $options['refresh_url'] : 'https://chatkit.beepi.no/api/chatkit/refresh';
+$value   = isset( $options['refresh_url'] ) ? $options['refresh_url'] : Beepi_ChatKit_Embed::DEFAULT_REFRESH_URL;
 echo '<input type="url" name="beepi_chatkit_options[refresh_url]" value="' . esc_attr( $value ) . '" class="regular-text" />';
 echo '<p class="description">Cloudflare Worker endpoint for token refresh</p>';
 }
