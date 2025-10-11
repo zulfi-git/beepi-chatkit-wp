@@ -1,7 +1,7 @@
 # Beepi ChatKit WordPress Plugin - Codebase Assessment
 
 **Date:** October 2025  
-**Version Assessed:** 1.1.0  
+**Version Assessed:** 1.3.0  
 **Assessment Type:** Quality, Maintainability, Testing, Best Practices
 
 ---
