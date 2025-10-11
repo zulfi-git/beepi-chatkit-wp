@@ -104,6 +104,9 @@ The ChatKit initialization logic is in `assets/js/chatkit-init.js`. This file ha
 - Active internet connection (for loading ChatKit from OpenAI CDN)
 - Valid Cloudflare Worker endpoints for token management
 
+## Technical Notes
+Follow the official OpenAI ChatKit documentation: https://platform.openai.com/docs/guides/chatkit
+
 ## Documentation
 
 - **[CHANGELOG.md](./CHANGELOG.md)** - Complete version history and changes
