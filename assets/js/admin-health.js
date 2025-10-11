@@ -48,14 +48,10 @@
 	function displayHealthStatus(data) {
 		const container = $('#beepi-chatkit-health-status');
 		const status = data.status || 'unknown';
-		const uptime = data.uptime || 0;
 		const version = data.version || 'N/A';
 		
 		// Determine status class
 		const statusClass = status === 'ok' ? 'status-ok' : 'status-error';
-		
-		// Format uptime
-		const uptimeFormatted = formatUptime(uptime);
 		
 		// Build HTML
 		const html = `
@@ -63,10 +59,6 @@
 				<div class="beepi-health-item">
 					<span class="beepi-health-label">Status:</span>
 					<span class="beepi-health-value beepi-health-status ${statusClass}">${escapeHtml(status)}</span>
-				</div>
-				<div class="beepi-health-item">
-					<span class="beepi-health-label">Uptime:</span>
-					<span class="beepi-health-value">${uptimeFormatted}</span>
 				</div>
 				<div class="beepi-health-item">
 					<span class="beepi-health-label">Version:</span>
@@ -90,27 +82,6 @@
 				<p><strong>Error:</strong> ${escapeHtml(message)}</p>
 			</div>
 		`);
-	}
-
-	/**
-	 * Format uptime in seconds to human-readable format.
-	 *
-	 * @param {number} seconds Uptime in seconds.
-	 * @return {string} Formatted uptime.
-	 */
-	function formatUptime(seconds) {
-		if (seconds < 60) {
-			return seconds + ' seconds';
-		} else if (seconds < 3600) {
-			const minutes = Math.floor(seconds / 60);
-			return minutes + ' minute' + (minutes !== 1 ? 's' : '');
-		} else if (seconds < 86400) {
-			const hours = Math.floor(seconds / 3600);
-			return hours + ' hour' + (hours !== 1 ? 's' : '');
-		} else {
-			const days = Math.floor(seconds / 86400);
-			return days + ' day' + (days !== 1 ? 's' : '');
-		}
 	}
 
 	/**

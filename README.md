@@ -41,7 +41,6 @@ After activating the plugin, navigate to **Settings > Beepi ChatKit** in your Wo
 
 At the top of the settings page, you'll see the Worker Health Status section displaying:
 - **Status**: Current operational status (ok/error)
-- **Uptime**: How long the worker has been running
 - **Version**: Current worker version
 
 Click "Refresh Status" to update the health information in real-time.

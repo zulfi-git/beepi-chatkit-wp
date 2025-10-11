@@ -55,8 +55,8 @@ class Test_Health_Status extends PHPUnit\Framework\TestCase {
 		
 		if ( $result['success'] ) {
 			$this->assertArrayHasKey( 'status', $result );
-			$this->assertArrayHasKey( 'uptime', $result );
 			$this->assertArrayHasKey( 'version', $result );
+			$this->assertArrayNotHasKey( 'uptime', $result );
 		} else {
 			$this->assertArrayHasKey( 'error', $result );
 		}

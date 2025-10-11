@@ -85,7 +85,7 @@ if ( ! function_exists( 'wp_remote_retrieve_response_code' ) ) {
 
 if ( ! function_exists( 'wp_remote_retrieve_body' ) ) {
 	function wp_remote_retrieve_body( $response ) {
-		return '{"status":"ok","uptime":0,"version":"1.0.0"}';
+		return '{"status":"ok","version":"1.0.0"}';
 	}
 }
 

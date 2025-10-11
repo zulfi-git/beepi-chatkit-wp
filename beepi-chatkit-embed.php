@@ -42,7 +42,7 @@ function beepi_chatkit_get_option( $key, $default = '' ) {
 /**
  * Fetch health status from Cloudflare Worker.
  *
- * @return array Health status data with keys: success, status, uptime, version, error.
+ * @return array Health status data with keys: success, status, version, error.
  */
 function beepi_chatkit_get_health_status() {
 	// Get the base URL from start_url by extracting the domain.
@@ -110,7 +110,6 @@ function beepi_chatkit_get_health_status() {
 	return array(
 		'success' => true,
 		'status'  => isset( $data['status'] ) ? sanitize_text_field( $data['status'] ) : '',
-		'uptime'  => isset( $data['uptime'] ) ? absint( $data['uptime'] ) : 0,
 		'version' => isset( $data['version'] ) ? sanitize_text_field( $data['version'] ) : '',
 	);
 }
