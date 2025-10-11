@@ -86,7 +86,7 @@ The ChatKit initialization logic is in `assets/js/chatkit-init.js`. This file ha
 ## Requirements
 
 - WordPress 5.0 or higher
-- PHP 7.4 or higher
+- PHP 8.0 or higher
 - Active internet connection (for loading ChatKit from OpenAI CDN)
 - Valid Cloudflare Worker endpoints for token management
 

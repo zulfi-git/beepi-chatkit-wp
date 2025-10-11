@@ -4,7 +4,7 @@ This document explains how to run tests for the Beepi ChatKit Embed plugin.
 
 ## Prerequisites
 
-- PHP 7.4 or higher
+- PHP 8.0 or higher
 - Composer (for managing dependencies)
 
 ## Installing Dependencies
@@ -70,7 +70,7 @@ Tests are automatically run via GitHub Actions on:
 - Push to main branch
 - Pull requests to main branch
 
-The tests run on multiple PHP versions (7.4, 8.0, 8.1, 8.2) to ensure compatibility.
+The tests run on multiple PHP versions (8.0, 8.1, 8.2, 8.3) to ensure compatibility.
 
 ## Current Test Coverage
 
