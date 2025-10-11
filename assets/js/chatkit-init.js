@@ -48,15 +48,21 @@
 		}
 
 		// Ensure the container element exists.
-		const chatkit = document.getElementById('chatkit-container');
-		if (!chatkit) {
+		const container = document.getElementById('chatkit-container');
+		if (!container) {
 			console.error('Beepi ChatKit: Container element not found.');
+			return;
+		}
+
+		// Ensure the ChatKit SDK is loaded.
+		if (typeof window.ChatKit === 'undefined') {
+			console.error('Beepi ChatKit: ChatKit SDK not loaded.');
 			return;
 		}
 
 		// Initialize ChatKit with configuration using the official OpenAI pattern.
 		try {
-			chatkit.setOptions({
+			window.ChatKit.setOptions({
 				api: {
 					/**
 					 * Get or refresh client secret for ChatKit API authentication.
