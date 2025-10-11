@@ -14,14 +14,16 @@ class Test_Constants extends PHPUnit\Framework\TestCase {
 	 * Test that DEFAULT_START_URL constant is defined.
 	 */
 	public function test_default_start_url_constant_exists() {
-		$this->assertTrue( defined( 'Beepi_ChatKit_Embed::DEFAULT_START_URL' ) );
+		$reflection = new ReflectionClass('Beepi_ChatKit_Embed');
+		$this->assertTrue($reflection->hasConstant('DEFAULT_START_URL'));
 	}
 
 	/**
 	 * Test that DEFAULT_REFRESH_URL constant is defined.
 	 */
 	public function test_default_refresh_url_constant_exists() {
-		$this->assertTrue( defined( 'Beepi_ChatKit_Embed::DEFAULT_REFRESH_URL' ) );
+		$reflection = new ReflectionClass('Beepi_ChatKit_Embed');
+		$this->assertTrue($reflection->hasConstant('DEFAULT_REFRESH_URL'));
 	}
 
 	/**
