@@ -1,0 +1,45 @@
+# Git attributes for proper line endings and diffs
+* text=auto
+
+# Source code
+*.php text diff=php
+*.js text
+*.css text
+*.scss text
+*.json text
+
+# Documentation
+*.md text
+*.txt text
+README text
+
+# Binaries
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.flv binary
+*.fla binary
+*.swf binary
+*.gz binary
+*.zip binary
+*.7z binary
+*.ttf binary
+*.eot binary
+*.woff binary
+*.woff2 binary
+*.svg binary
+
+# Archives
+*.zip export-ignore
+*.tar export-ignore
+*.gz export-ignore
+
+# Git files
+.gitattributes export-ignore
+.gitignore export-ignore
+.gitkeep export-ignore
