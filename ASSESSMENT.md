@@ -33,7 +33,7 @@ This is a well-structured, lightweight WordPress plugin that successfully implem
 
 ### 3. **Documentation** ✅
 - Comprehensive README.md with clear instructions
-- GPL v3 license properly documented
+- Proprietary license properly documented
 - Changelog maintained
 - Code comments where needed
 - File structure clearly documented
@@ -126,7 +126,7 @@ This is a well-structured, lightweight WordPress plugin that successfully implem
 - [x] Proper plugin header
 - [x] Internationalization-ready (text domain)
 - [x] Security best practices (ABSPATH check)
-- [x] GPL v3 licensed
+- [x] Proprietary licensed
 
 ### OpenAI ChatKit Guidelines ✅
 - [x] Uses official embedding pattern

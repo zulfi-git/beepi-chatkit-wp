@@ -1,6 +1,6 @@
 # Contributing to Beepi ChatKit Embed
 
-Thank you for your interest in contributing! This is a personal project, but contributions are welcome.
+**Note: This is a private and proprietary project.** While the code may be visible for review purposes, this is not an open-source project and contributions may be restricted.
 
 ## Getting Started
 
@@ -221,7 +221,11 @@ Instead:
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the GNU General Public License v3.0.
+**This is proprietary software.** By contributing, you acknowledge that:
+- All contributions become the property of Beepi
+- The software is not open source
+- Contributions are subject to review and approval by the project maintainers
+- You have the right to submit the contributions you provide
 
 ---
 

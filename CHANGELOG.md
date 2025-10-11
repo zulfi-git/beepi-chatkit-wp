@@ -73,4 +73,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Secure token management
 - Mobile-responsive design
 - WordPress standards compliance
-- GPLv3 licensing
+- Proprietary licensing
