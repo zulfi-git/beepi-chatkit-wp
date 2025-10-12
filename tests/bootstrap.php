@@ -18,6 +18,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'ABSPATH', dirname( __DIR__ ) . '/' );
 }
 
+// Global options storage for testing.
+global $test_options;
+$test_options = array();
+
 // Mock WordPress functions for testing.
 if ( ! function_exists( 'register_activation_hook' ) ) {
 	function register_activation_hook( $file, $function ) {
@@ -27,12 +31,31 @@ if ( ! function_exists( 'register_activation_hook' ) ) {
 
 if ( ! function_exists( 'get_option' ) ) {
 	function get_option( $option, $default = false ) {
-		return $default;
+		global $test_options;
+		return isset( $test_options[ $option ] ) ? $test_options[ $option ] : $default;
 	}
 }
 
 if ( ! function_exists( 'add_option' ) ) {
 	function add_option( $option, $value ) {
+		global $test_options;
+		$test_options[ $option ] = $value;
+		return true;
+	}
+}
+
+if ( ! function_exists( 'update_option' ) ) {
+	function update_option( $option, $value ) {
+		global $test_options;
+		$test_options[ $option ] = $value;
+		return true;
+	}
+}
+
+if ( ! function_exists( 'delete_option' ) ) {
+	function delete_option( $option ) {
+		global $test_options;
+		unset( $test_options[ $option ] );
 		return true;
 	}
 }

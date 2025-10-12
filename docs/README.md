@@ -2,7 +2,17 @@
 
 This directory contains technical documentation for the Beepi ChatKit Embed plugin.
 
-## Contents
+## Recent Fix: ChatKit Agent Not Showing
+
+### 🔥 Issue Resolution Documents (Oct 2025)
+
+- **[CHATKIT-FIX-SUMMARY.md](./CHATKIT-FIX-SUMMARY.md)** - Complete technical summary of the ChatKit initialization fix
+- **[BEFORE-AFTER-COMPARISON.md](./BEFORE-AFTER-COMPARISON.md)** - Side-by-side code comparison of incorrect vs. correct implementation
+- **[VISUAL-GUIDE.md](./VISUAL-GUIDE.md)** - Flow diagrams and architecture overview for the fix
+
+**Quick Summary:** Fixed ChatKit agent not appearing in production by changing from direct property assignment to proper `setOptions()` API method with complete configuration structure.
+
+## Assessment & Planning Documents
 
 - **[ASSESSMENT.md](./ASSESSMENT.md)** - Comprehensive codebase assessment with quality metrics, strengths, areas for improvement, and phased work packages
 - **[ASSESSMENT-SUMMARY.md](./ASSESSMENT-SUMMARY.md)** - Quick reference summary of the assessment findings and priority improvements
@@ -23,5 +33,6 @@ These technical documents provide:
 - Security considerations
 - Future enhancement roadmap
 - Implementation guidelines
+- Bug fix documentation and analysis
 
-All assessments reflect the current state of the plugin (v1.4.0) and are maintained as the plugin evolves.
+All assessments reflect the current state of the plugin and are maintained as the plugin evolves.
