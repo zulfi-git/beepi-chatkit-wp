@@ -42,40 +42,54 @@ Updated `assets/js/chatkit-init.js` to use the proper OpenAI ChatKit API:
    - `composer` - Attachment settings
    - `startScreen` - Greeting message and default prompts
 3. **Fixed initialization order**: Set workflow-id attribute before calling setOptions()
+4. **Extracted theme configuration**: Theme settings moved to `CHATKIT_THEME_CONFIG` constant for easier customization
 
 ## Configuration Added
 
+The theme configuration has been extracted to a separate constant (`CHATKIT_THEME_CONFIG`) at the top of the initialization script for easier maintenance and customization.
+
 ### Theme Configuration
 ```javascript
-theme: {
-    colorScheme: 'light',
-    color: {
-        accent: {
-            primary: '#FF4500',
-            level: 2
+const CHATKIT_THEME_CONFIG = {
+    theme: {
+        colorScheme: 'light',
+        color: {
+            accent: {
+                primary: '#FF4500',
+                level: 2
+            }
+        },
+        radius: 'round',
+        density: 'normal',
+        typography: {
+            baseSize: 16,
+            fontFamily: '"OpenAI Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
         }
     },
-    radius: 'round',
-    density: 'normal',
-    typography: {
-        baseSize: 16,
-        fontFamily: '"OpenAI Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+    composer: {
+        attachments: {
+            enabled: false
+        }
+    },
+    startScreen: {
+        greeting: 'How can I help you today?',
+        prompts: [
+            {
+                icon: 'circle-question',
+                label: 'Get Started',
+                prompt: 'Hi! How can you assist me today?'
+            }
+        ]
     }
-}
+};
 ```
 
-### Start Screen Configuration
+This configuration is then applied using the spread operator:
 ```javascript
-startScreen: {
-    greeting: 'How can I help you today?',
-    prompts: [
-        {
-            icon: 'circle-question',
-            label: 'Get Started',
-            prompt: 'Hi! How can you assist me today?'
-        }
-    ]
-}
+chatkitWidget.setOptions({
+    api: { /* ... */ },
+    ...CHATKIT_THEME_CONFIG
+});
 ```
 
 ## Expected Behavior After Fix

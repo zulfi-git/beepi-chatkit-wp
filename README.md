@@ -97,6 +97,11 @@ The ChatKit initialization logic is in `assets/js/chatkit-init.js`. This file ha
 - Connecting to your Cloudflare Worker endpoints
 - Token generation and refresh
 
+To customize the chat widget's appearance and behavior, edit the `CHATKIT_THEME_CONFIG` constant at the top of `assets/js/chatkit-init.js`. This constant contains:
+- Theme settings (colors, typography, layout)
+- Composer settings (attachments, etc.)
+- Start screen settings (greeting, prompts)
+
 ## Requirements
 
 - WordPress 5.0 or higher
