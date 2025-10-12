@@ -28,12 +28,12 @@
    git clone https://github.com/zulfi-git/beepi-chatkit-wp.git
    ```
 
-2. Configure the plugin by editing `beepi-chatkit-embed.php`:
-   ```php
-   define( 'CHATKIT_WORKFLOW_ID', 'your-workflow-id' );
-   ```
+2. Activate the plugin in WordPress admin
 
-3. Activate the plugin in WordPress admin
+3. Configure the plugin via WordPress admin:
+   - Go to **Settings > Beepi ChatKit**
+   - Enter your ChatKit Workflow ID from OpenAI
+   - Configure API endpoints if needed (defaults are provided)
 
 4. Create a test page with the `[chatkit]` shortcode
 

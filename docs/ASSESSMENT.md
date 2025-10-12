@@ -1,7 +1,7 @@
 # Beepi ChatKit WordPress Plugin - Codebase Assessment
 
 **Date:** October 2025  
-**Version Assessed:** 1.3.0  
+**Version Assessed:** 1.4.0  
 **Assessment Type:** Quality, Maintainability, Testing, Best Practices
 
 ---
@@ -502,5 +502,5 @@ The Beepi ChatKit WordPress plugin is a **well-crafted, focused plugin** that su
 ---
 
 **Assessment Completed By:** GitHub Copilot  
-**Date:** October 11, 2025  
-**Version:** 1.0
+**Date:** October 12, 2025  
+**Version:** 1.4.0
