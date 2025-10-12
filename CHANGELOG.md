@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Extracted theme configuration to `CHATKIT_THEME_CONFIG` constant for improved maintainability and easier customization
+
 ### Fixed
 - Fixed ChatKit agent not appearing in production by using proper `setOptions()` API
 - Changed from direct `getClientSecret` property assignment to nested `api.getClientSecret` configuration

@@ -17,6 +17,48 @@
 (function() {
 	'use strict';
 
+	/**
+	 * Default theme configuration for ChatKit.
+	 * 
+	 * This configuration object defines the visual appearance and behavior
+	 * of the ChatKit interface. Modify these values to customize the look
+	 * and feel of the chat widget.
+	 * 
+	 * @constant {Object}
+	 */
+	const CHATKIT_THEME_CONFIG = {
+		theme: {
+			colorScheme: 'light',
+			color: {
+				accent: {
+					primary: '#FF4500',
+					level: 2
+				}
+			},
+			radius: 'round',
+			density: 'normal',
+			typography: {
+				baseSize: 16,
+				fontFamily: '"OpenAI Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+			}
+		},
+		composer: {
+			attachments: {
+				enabled: false
+			}
+		},
+		startScreen: {
+			greeting: 'How can I help you today?',
+			prompts: [
+				{
+					icon: 'circle-question',
+					label: 'Get Started',
+					prompt: 'Hi! How can you assist me today?'
+				}
+			]
+		}
+	};
+
 	// Wait for DOM to be ready.
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', waitForChatKitSDK);
@@ -165,36 +207,7 @@
 						}
 					}
 				},
-				theme: {
-					colorScheme: 'light',
-					color: {
-						accent: {
-							primary: '#FF4500',
-							level: 2
-						}
-					},
-					radius: 'round',
-					density: 'normal',
-					typography: {
-						baseSize: 16,
-						fontFamily: '"OpenAI Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
-					}
-				},
-				composer: {
-					attachments: {
-						enabled: false
-					}
-				},
-				startScreen: {
-					greeting: 'How can I help you today?',
-					prompts: [
-						{
-							icon: 'circle-question',
-							label: 'Get Started',
-							prompt: 'Hi! How can you assist me today?'
-						}
-					]
-				}
+				...CHATKIT_THEME_CONFIG
 			});
 
 			console.log('Beepi ChatKit: Initialized successfully with web component.');
