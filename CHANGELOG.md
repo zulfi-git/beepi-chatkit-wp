@@ -8,9 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
-- Fixed race condition where ChatKit SDK initialization would fail with "ChatKit SDK not loaded" error
-- Added polling mechanism to wait for SDK availability before initialization (polls every 100ms for up to 5 seconds)
-- Improved error messaging when SDK fails to load within timeout period
+- Fixed ChatKit SDK initialization by implementing Web Component (custom element) approach
+- Replaced window.ChatKit polling with customElements.whenDefined() for proper Web Component support
+- Updated initialization to create and configure chatkit-widget custom element
+- Added fallback polling mechanism for older browsers
+- Resolved "ChatKit SDK not loaded" error by using correct integration pattern
 
 ## [1.4.1] - 2025-10-12
 
