@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.1] - 2025-10-12
+
+### Changed
+- Implemented `filemtime()` cache busting for all JavaScript and CSS assets
+- Replaced hardcoded version strings with file modification timestamps
+- Ensures browsers fetch updated assets when files change
+
 ## [1.4.0] - 2025-10-12
 
 ### Added
