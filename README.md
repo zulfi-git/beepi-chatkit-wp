@@ -133,7 +133,7 @@ This is a private project and not open source.
 
 1. **Check if the shortcode is present:**
    - Ensure you've added `[chatkit]` to your page/post
-   - Check the page source to verify the `chatkit-container` div is present
+   - Check the page source to verify the `<openai-chatkit>` element is present
 
 2. **Verify configuration:**
    - Go to Settings > Beepi ChatKit in WordPress admin
@@ -212,10 +212,16 @@ For issues and questions:
 
 See [CHANGELOG.md](./CHANGELOG.md) for complete version history.
 
+### Unreleased
+- Updated shortcode to render `<openai-chatkit>` element directly instead of wrapper div
+- Simplified initialization to configure existing element rather than creating and appending new one
+- Corrected ChatKit custom element name from 'chatkit-widget' to 'openai-chatkit'
+- Resolved ChatKit SDK initialization failure caused by waiting for incorrect custom element name
+
 ### 1.5.0 (2025-10-12)
 - Fixed ChatKit SDK initialization by implementing Web Component (custom element) approach
 - Replaced window.ChatKit polling with customElements.whenDefined() for proper Web Component support
-- Updated initialization to create and configure chatkit-widget custom element
+- Updated initialization to create and configure openai-chatkit custom element
 - Added fallback polling mechanism for older browsers
 - Resolved "ChatKit SDK not loaded" error by using correct integration pattern
 

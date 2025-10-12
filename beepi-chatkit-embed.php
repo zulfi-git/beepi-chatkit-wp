@@ -230,11 +230,11 @@ class Beepi_ChatKit_Embed {
 	 * Render the ChatKit shortcode.
 	 *
 	 * @param array $atts Shortcode attributes (currently unused).
-	 * @return string The HTML for the chat container.
+	 * @return string The HTML for the ChatKit web component.
 	 */
 	public static function render_chatkit_shortcode( $atts ) {
 		self::$shortcode_used = true;
-		return '<div id="chatkit-container"></div>';
+		return '<openai-chatkit id="chatkit-container"></openai-chatkit>';
 	}
 
 	/**
