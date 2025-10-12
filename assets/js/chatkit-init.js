@@ -19,9 +19,42 @@
 
 	// Wait for DOM to be ready.
 	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initChatKit);
+		document.addEventListener('DOMContentLoaded', waitForChatKitSDK);
 	} else {
-		initChatKit();
+		waitForChatKitSDK();
+	}
+
+	/**
+	 * Wait for the ChatKit SDK to load before initializing.
+	 * 
+	 * This function polls for the window.ChatKit object to become available,
+	 * which handles the race condition where the SDK script hasn't finished
+	 * executing even though it's been loaded.
+	 * 
+	 * @returns {void}
+	 */
+	function waitForChatKitSDK() {
+		let attempts = 0;
+		const maxAttempts = 50; // 5 seconds total (50 * 100ms)
+		const pollInterval = 100; // 100ms between checks
+
+		const checkSDK = function() {
+			attempts++;
+
+			if (typeof window.ChatKit !== 'undefined') {
+				// SDK is loaded, proceed with initialization
+				initChatKit();
+			} else if (attempts >= maxAttempts) {
+				// Timeout after max attempts
+				console.error('Beepi ChatKit: ChatKit SDK failed to load after ' + (maxAttempts * pollInterval / 1000) + ' seconds.');
+			} else {
+				// Keep polling
+				setTimeout(checkSDK, pollInterval);
+			}
+		};
+
+		// Start polling
+		checkSDK();
 	}
 
 	/**
