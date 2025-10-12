@@ -37,6 +37,7 @@
 		let attempts = 0;
 		const maxAttempts = 50; // 5 seconds total (50 * 100ms)
 		const pollInterval = 100; // 100ms between checks
+		const timeoutSeconds = maxAttempts * pollInterval / 1000;
 
 		const checkSDK = function() {
 			attempts++;
@@ -46,7 +47,7 @@
 				initChatKit();
 			} else if (attempts >= maxAttempts) {
 				// Timeout after max attempts
-				console.error('Beepi ChatKit: ChatKit SDK failed to load after ' + (maxAttempts * pollInterval / 1000) + ' seconds.');
+				console.error('Beepi ChatKit: ChatKit SDK failed to load after ' + timeoutSeconds + ' seconds.');
 			} else {
 				// Keep polling
 				setTimeout(checkSDK, pollInterval);
