@@ -97,7 +97,7 @@
 	 * This function sets up the ChatKit interface by:
 	 * 1. Validating configuration
 	 * 2. Finding the openai-chatkit web component
-	 * 3. Configuring it via getClientSecret property
+	 * 3. Configuring it via setOptions() method with proper API structure
 	 * 
 	 * The openai-chatkit element should already exist in the DOM
 	 * (rendered by the shortcode), and we configure it here.
@@ -120,48 +120,82 @@
 
 		// Initialize ChatKit with configuration using Web Components.
 		try {
-			// Define the getClientSecret function that the widget will call
-			chatkitWidget.getClientSecret = async function(currentClientSecret) {
-				try {
-					if (!currentClientSecret) {
-						// Get initial client secret.
-						const res = await fetch(beepichatKitConfig.startUrl, { 
-							method: 'POST' 
-						});
-						
-						if (!res.ok) {
-							throw new Error('Failed to get client secret: ' + res.status);
-						}
-						
-						const {client_secret} = await res.json();
-						return client_secret;
-					}
-					
-					// Refresh client secret.
-					const res = await fetch(beepichatKitConfig.refreshUrl, {
-						method: 'POST',
-						body: JSON.stringify({ currentClientSecret }),
-						headers: {
-							'Content-Type': 'application/json',
-						},
-					});
-					
-					if (!res.ok) {
-						throw new Error('Failed to refresh client secret: ' + res.status);
-					}
-					
-					const {client_secret} = await res.json();
-					return client_secret;
-				} catch (error) {
-					console.error('Beepi ChatKit: Error with client secret:', error);
-					throw error;
-				}
-			};
-			
 			// Add workflow ID if configured
 			if (beepichatKitConfig.workflowId) {
 				chatkitWidget.setAttribute('workflow-id', beepichatKitConfig.workflowId);
 			}
+
+			// Configure ChatKit using setOptions() method
+			chatkitWidget.setOptions({
+				api: {
+					getClientSecret: async function(currentClientSecret) {
+						try {
+							if (!currentClientSecret) {
+								// Get initial client secret.
+								const res = await fetch(beepichatKitConfig.startUrl, { 
+									method: 'POST' 
+								});
+								
+								if (!res.ok) {
+									throw new Error('Failed to get client secret: ' + res.status);
+								}
+								
+								const {client_secret} = await res.json();
+								return client_secret;
+							}
+							
+							// Refresh client secret.
+							const res = await fetch(beepichatKitConfig.refreshUrl, {
+								method: 'POST',
+								body: JSON.stringify({ currentClientSecret }),
+								headers: {
+									'Content-Type': 'application/json',
+								},
+							});
+							
+							if (!res.ok) {
+								throw new Error('Failed to refresh client secret: ' + res.status);
+							}
+							
+							const {client_secret} = await res.json();
+							return client_secret;
+						} catch (error) {
+							console.error('Beepi ChatKit: Error with client secret:', error);
+							throw error;
+						}
+					}
+				},
+				theme: {
+					colorScheme: 'light',
+					color: {
+						accent: {
+							primary: '#FF4500',
+							level: 2
+						}
+					},
+					radius: 'round',
+					density: 'normal',
+					typography: {
+						baseSize: 16,
+						fontFamily: '"OpenAI Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
+					}
+				},
+				composer: {
+					attachments: {
+						enabled: false
+					}
+				},
+				startScreen: {
+					greeting: 'How can I help you today?',
+					prompts: [
+						{
+							icon: 'circle-question',
+							label: 'Get Started',
+							prompt: 'Hi! How can you assist me today?'
+						}
+					]
+				}
+			});
 
 			console.log('Beepi ChatKit: Initialized successfully with web component.');
 		} catch (error) {
