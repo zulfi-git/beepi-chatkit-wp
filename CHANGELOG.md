@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fixed race condition where ChatKit SDK initialization would fail with "ChatKit SDK not loaded" error
+- Added polling mechanism to wait for SDK availability before initialization (polls every 100ms for up to 5 seconds)
+- Improved error messaging when SDK fails to load within timeout period
+
 ## [1.4.1] - 2025-10-12
 
 ### Changed
