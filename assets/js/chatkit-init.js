@@ -37,9 +37,9 @@
 	 * @returns {void}
 	 */
 	function waitForChatKitSDK() {
-		// ChatKit uses a custom element. Common names are 'chatkit-widget' or similar.
+		// ChatKit uses a custom element named 'openai-chatkit'
 		// We'll check for the custom element to be defined.
-		const elementName = 'chatkit-widget';
+		const elementName = 'openai-chatkit';
 		
 		// Use customElements.whenDefined() to wait for the element
 		if (typeof customElements !== 'undefined' && customElements.whenDefined) {
@@ -120,8 +120,8 @@
 
 		// Initialize ChatKit with configuration using Web Components.
 		try {
-			// Create the chatkit-widget element
-			const chatkitWidget = document.createElement('chatkit-widget');
+			// Create the openai-chatkit element
+			const chatkitWidget = document.createElement('openai-chatkit');
 			
 			// Define the getClientSecret function that the widget will call
 			chatkitWidget.getClientSecret = async function(currentClientSecret) {

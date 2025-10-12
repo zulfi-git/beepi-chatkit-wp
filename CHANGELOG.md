@@ -7,12 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Corrected ChatKit custom element name from 'chatkit-widget' to 'openai-chatkit'
+- Resolved ChatKit SDK initialization failure caused by waiting for incorrect custom element name
+
 ## [1.5.0] - 2025-10-12
 
 ### Fixed
 - Fixed ChatKit SDK initialization by implementing Web Component (custom element) approach
 - Replaced window.ChatKit polling with customElements.whenDefined() for proper Web Component support
-- Updated initialization to create and configure chatkit-widget custom element
+- Updated initialization to create and configure openai-chatkit custom element
 - Added fallback polling mechanism for older browsers
 - Resolved "ChatKit SDK not loaded" error by using correct integration pattern
 
