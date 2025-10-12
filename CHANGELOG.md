@@ -7,15 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Added configurable startScreen settings through WordPress admin interface
+- New admin fields for Start Screen Greeting, Prompt Label, and Prompt Text
+- Comprehensive test suite for startScreen configuration with 8 new tests
+- Improved test infrastructure with proper WordPress option mocking
+
 ### Changed
-- Extracted theme configuration to `CHATKIT_THEME_CONFIG` constant for improved maintainability and easier customization
+- Extracted startScreen configuration strings from JavaScript to PHP backend
+- Start screen greeting, prompt label, and prompt text are now customizable without code changes
+- Updated JavaScript to use configuration values passed from WordPress via `wp_localize_script`
+- Removed hardcoded `CHATKIT_THEME_CONFIG` constant in favor of dynamic configuration
 
 ### Fixed
 - Fixed ChatKit agent not appearing in production by using proper `setOptions()` API
 - Changed from direct `getClientSecret` property assignment to nested `api.getClientSecret` configuration
 - Added proper theme configuration (colorScheme, color, radius, density, typography)
 - Added composer configuration for attachments support
-- Added startScreen configuration with greeting and default prompts
 - Moved workflow-id attribute setting before setOptions() call for proper initialization order
 
 ### Changed
@@ -28,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The ChatKit web component requires initialization via `setOptions()` method
 - Previous implementation incorrectly set `getClientSecret` as a direct property
 - Correct implementation uses `setOptions({ api: { getClientSecret: function() {} } })`
+- StartScreen configuration is now managed centrally in WordPress database for easier localization
 - Added complete configuration object structure matching OpenAI ChatKit API requirements
 
 ## [1.5.0] - 2025-10-12

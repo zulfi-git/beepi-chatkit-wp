@@ -121,9 +121,12 @@ function beepi_chatkit_activate() {
 	// Set default options only if they don't exist.
 	if ( false === get_option( 'beepi_chatkit_options' ) ) {
 		$default_options = array(
-			'start_url'   => Beepi_ChatKit_Embed::DEFAULT_START_URL,
-			'refresh_url' => Beepi_ChatKit_Embed::DEFAULT_REFRESH_URL,
-			'workflow_id' => '',
+			'start_url'               => Beepi_ChatKit_Embed::DEFAULT_START_URL,
+			'refresh_url'             => Beepi_ChatKit_Embed::DEFAULT_REFRESH_URL,
+			'workflow_id'             => '',
+			'start_screen_greeting'   => 'How can I help you today?',
+			'start_screen_prompt_label' => 'Get Started',
+			'start_screen_prompt_text' => 'Hi! How can you assist me today?',
 		);
 		add_option( 'beepi_chatkit_options', $default_options );
 	}
@@ -274,9 +277,12 @@ class Beepi_ChatKit_Embed {
 			'beepi-chatkit-init',
 			'beepichatKitConfig',
 			array(
-				'startUrl'   => beepi_chatkit_get_option( 'start_url', self::DEFAULT_START_URL ),
-				'refreshUrl' => beepi_chatkit_get_option( 'refresh_url', self::DEFAULT_REFRESH_URL ),
-				'workflowId' => beepi_chatkit_get_option( 'workflow_id', '' ),
+				'startUrl'               => beepi_chatkit_get_option( 'start_url', self::DEFAULT_START_URL ),
+				'refreshUrl'             => beepi_chatkit_get_option( 'refresh_url', self::DEFAULT_REFRESH_URL ),
+				'workflowId'             => beepi_chatkit_get_option( 'workflow_id', '' ),
+				'startScreenGreeting'    => beepi_chatkit_get_option( 'start_screen_greeting', 'How can I help you today?' ),
+				'startScreenPromptLabel' => beepi_chatkit_get_option( 'start_screen_prompt_label', 'Get Started' ),
+				'startScreenPromptText'  => beepi_chatkit_get_option( 'start_screen_prompt_text', 'Hi! How can you assist me today?' ),
 			)
 		);
 

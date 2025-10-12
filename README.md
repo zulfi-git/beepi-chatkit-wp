@@ -52,6 +52,9 @@ Configure the following settings:
 - **Workflow ID**: Your ChatKit workflow ID from OpenAI (required)
 - **Start URL**: Cloudflare Worker endpoint for token generation (default: `https://chatkit.beepi.no/api/chatkit/start`)
 - **Refresh URL**: Cloudflare Worker endpoint for token refresh (default: `https://chatkit.beepi.no/api/chatkit/refresh`)
+- **Start Screen Greeting**: The welcome message shown when chat starts (default: "How can I help you today?")
+- **Start Screen Prompt Label**: The button label on the start screen (default: "Get Started")
+- **Start Screen Prompt Text**: The message sent when the button is clicked (default: "Hi! How can you assist me today?")
 
 All settings are stored securely in the WordPress database.
 
@@ -97,10 +100,17 @@ The ChatKit initialization logic is in `assets/js/chatkit-init.js`. This file ha
 - Connecting to your Cloudflare Worker endpoints
 - Token generation and refresh
 
-To customize the chat widget's appearance and behavior, edit the `CHATKIT_THEME_CONFIG` constant at the top of `assets/js/chatkit-init.js`. This constant contains:
-- Theme settings (colors, typography, layout)
-- Composer settings (attachments, etc.)
-- Start screen settings (greeting, prompts)
+### Start Screen Configuration
+
+You can customize the start screen greeting and prompts through the WordPress admin interface:
+
+1. Go to **Settings > Beepi ChatKit**
+2. Configure the following Start Screen settings:
+   - **Start Screen Greeting**: The welcome message shown when chat starts (default: "How can I help you today?")
+   - **Start Screen Prompt Label**: The button label on the start screen (default: "Get Started")
+   - **Start Screen Prompt Text**: The message sent when the button is clicked (default: "Hi! How can you assist me today?")
+
+These settings make it easy to localize the chat interface or customize it for your specific use case without modifying any code.
 
 ## Requirements
 
