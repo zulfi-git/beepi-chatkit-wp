@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2025-10-12
+
 ### Fixed
 - Fixed ChatKit SDK initialization by implementing Web Component (custom element) approach
 - Replaced window.ChatKit polling with customElements.whenDefined() for proper Web Component support

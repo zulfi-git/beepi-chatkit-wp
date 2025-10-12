@@ -212,6 +212,13 @@ For issues and questions:
 
 See [CHANGELOG.md](./CHANGELOG.md) for complete version history.
 
+### 1.5.0 (2025-10-12)
+- Fixed ChatKit SDK initialization by implementing Web Component (custom element) approach
+- Replaced window.ChatKit polling with customElements.whenDefined() for proper Web Component support
+- Updated initialization to create and configure chatkit-widget custom element
+- Added fallback polling mechanism for older browsers
+- Resolved "ChatKit SDK not loaded" error by using correct integration pattern
+
 ### 1.4.1 (2025-10-12)
 - Implemented `filemtime()` cache busting for all JavaScript and CSS assets
 - Replaced hardcoded version strings with file modification timestamps
