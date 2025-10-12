@@ -80,7 +80,7 @@
 				initChatKit();
 			} else if (attempts >= maxAttempts) {
 				// Timeout after max attempts
-				console.error('Beepi ChatKit: ChatKit custom element failed to load after ' + timeoutSeconds + ' seconds. Expected element: ' + elementName);
+				console.error(`Beepi ChatKit: ChatKit custom element failed to load after ${timeoutSeconds} seconds. Expected element: ${elementName}`);
 			} else {
 				// Keep polling
 				setTimeout(checkElement, pollInterval);
