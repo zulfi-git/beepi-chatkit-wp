@@ -74,7 +74,7 @@ wp_enqueue_script(
 'beepi-chatkit-admin',
 plugins_url( 'assets/js/admin-health.js', dirname( __FILE__ ) ),
 array( 'jquery' ),
-'1.3.0',
+filemtime( plugin_dir_path( dirname( __FILE__ ) ) . 'assets/js/admin-health.js' ),
 true
 );
 
@@ -93,7 +93,7 @@ wp_enqueue_style(
 'beepi-chatkit-admin',
 plugins_url( 'assets/css/admin-health.css', dirname( __FILE__ ) ),
 array(),
-'1.3.0'
+filemtime( plugin_dir_path( dirname( __FILE__ ) ) . 'assets/css/admin-health.css' )
 );
 }
 

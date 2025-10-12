@@ -211,6 +211,11 @@ For issues and questions:
 
 See [CHANGELOG.md](./CHANGELOG.md) for complete version history.
 
+### 1.4.1 (2025-10-12)
+- Implemented `filemtime()` cache busting for all JavaScript and CSS assets
+- Replaced hardcoded version strings with file modification timestamps
+- Ensures browsers fetch updated assets when files change
+
 ### 1.4.0 (2025-10-12)
 - Added Worker health status display in admin settings page
 - Real-time health monitoring with AJAX refresh

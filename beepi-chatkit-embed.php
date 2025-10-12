@@ -3,7 +3,7 @@
  * Plugin Name: Beepi ChatKit Embed
  * Plugin URI: https://github.com/zulfi-git/beepi-chatkit-wp
  * Description: Embeds an OpenAI ChatKit agent on WordPress pages using Cloudflare Worker endpoints for token generation.
- * Version: 1.4.0
+ * Version: 1.4.1
  * Author: Beepi
  * Author URI: https://beepi.no
  * License: Proprietary
@@ -265,7 +265,7 @@ class Beepi_ChatKit_Embed {
 			'beepi-chatkit-init',
 			plugins_url( 'assets/js/chatkit-init.js', __FILE__ ),
 			array( 'openai-chatkit' ),
-			'1.2.0',
+			filemtime( plugin_dir_path( __FILE__ ) . 'assets/js/chatkit-init.js' ),
 			true
 		);
 
@@ -285,7 +285,7 @@ class Beepi_ChatKit_Embed {
 			'beepi-chatkit-style',
 			plugins_url( 'assets/css/chatkit.css', __FILE__ ),
 			array(),
-			'1.2.0'
+			filemtime( plugin_dir_path( __FILE__ ) . 'assets/css/chatkit.css' )
 		);
 	}
 }
