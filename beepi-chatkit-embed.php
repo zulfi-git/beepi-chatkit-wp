@@ -200,6 +200,14 @@ class Beepi_ChatKit_Embed {
 	private static $shortcode_used = false;
 
 	/**
+	 * Container element ID for the ChatKit widget.
+	 * This is set by the shortcode and used in JavaScript configuration.
+	 *
+	 * @var string
+	 */
+	private static $container_id = 'chatkit-container';
+
+	/**
 	 * Initialize the plugin.
 	 */
 	public static function init() {
@@ -229,12 +237,36 @@ class Beepi_ChatKit_Embed {
 	/**
 	 * Render the ChatKit shortcode.
 	 *
-	 * @param array $atts Shortcode attributes (currently unused).
+	 * Container Element:
+	 * - Creates a div element that serves as the mount point for the ChatKit widget
+	 * - Default ID is 'chatkit-container', but can be customized via 'container_id' attribute
+	 * - The OpenAI ChatKit SDK will mount its widget inside this container
+	 * - The SDK handles all internal rendering (may include custom elements, shadow DOM, etc.)
+	 *
+	 * @param array $atts Shortcode attributes.
+	 *                    - container_id: Optional. Custom ID for the container element.
+	 *                                     Default: 'chatkit-container'
 	 * @return string The HTML for the chat container.
 	 */
 	public static function render_chatkit_shortcode( $atts ) {
 		self::$shortcode_used = true;
-		return '<div id="chatkit-container"></div>';
+		
+		// Parse shortcode attributes
+		$atts = shortcode_atts(
+			array(
+				'container_id' => 'chatkit-container',
+			),
+			$atts,
+			'chatkit'
+		);
+		
+		// Sanitize the container ID to ensure it's a valid HTML ID
+		$container_id = sanitize_html_class( $atts['container_id'] );
+		
+		// Store the container ID for use in JavaScript configuration
+		self::$container_id = $container_id;
+		
+		return '<div id="' . esc_attr( $container_id ) . '"></div>';
 	}
 
 	/**
@@ -274,9 +306,10 @@ class Beepi_ChatKit_Embed {
 			'beepi-chatkit-init',
 			'beepichatKitConfig',
 			array(
-				'startUrl'   => beepi_chatkit_get_option( 'start_url', self::DEFAULT_START_URL ),
-				'refreshUrl' => beepi_chatkit_get_option( 'refresh_url', self::DEFAULT_REFRESH_URL ),
-				'workflowId' => beepi_chatkit_get_option( 'workflow_id', '' ),
+				'startUrl'    => beepi_chatkit_get_option( 'start_url', self::DEFAULT_START_URL ),
+				'refreshUrl'  => beepi_chatkit_get_option( 'refresh_url', self::DEFAULT_REFRESH_URL ),
+				'workflowId'  => beepi_chatkit_get_option( 'workflow_id', '' ),
+				'containerId' => self::$container_id,
 			)
 		);
 

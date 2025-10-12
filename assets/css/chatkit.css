@@ -15,6 +15,15 @@
 
 /**
  * ChatKit container styling.
+ * 
+ * This styles the container element created by the [chatkit] shortcode.
+ * - Default container ID: #chatkit-container
+ * - Can be customized via shortcode: [chatkit container_id="custom-id"]
+ * - The OpenAI ChatKit SDK mounts its widget inside this container
+ * - The SDK handles all internal styling for the chat interface
+ * 
+ * If you use a custom container ID, update this selector accordingly:
+ * Example: #my-custom-chat { ... }
  */
 #chatkit-container {
 	width: 100%;

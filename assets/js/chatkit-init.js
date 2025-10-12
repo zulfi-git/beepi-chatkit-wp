@@ -66,6 +66,14 @@
 	 * 2. Configuring the ChatKit API with client secret handlers
 	 * 3. Setting up token generation and refresh mechanisms
 	 * 
+	 * Container Element:
+	 * - The plugin uses 'chatkit-container' as the container element ID
+	 * - This is a standard div element created by the WordPress shortcode
+	 * - The OpenAI ChatKit SDK mounts its widget inside this container
+	 * - The ChatKit SDK may create its own internal elements (custom elements,
+	 *   shadow DOM, etc.) but this is handled entirely by the SDK
+	 * - The container ID can be customized via the shortcode's 'container_id' attribute
+	 * 
 	 * @returns {void}
 	 */
 	function initChatKit() {
@@ -75,10 +83,12 @@
 			return;
 		}
 
-		// Ensure the container element exists.
-		const container = document.getElementById('chatkit-container');
+		// Get the container element ID from configuration (defaults to 'chatkit-container').
+		// This is the div element where the ChatKit widget will be mounted.
+		const containerId = beepichatKitConfig.containerId || 'chatkit-container';
+		const container = document.getElementById(containerId);
 		if (!container) {
-			console.error('Beepi ChatKit: Container element not found.');
+			console.error('Beepi ChatKit: Container element with ID "' + containerId + '" not found.');
 			return;
 		}
 

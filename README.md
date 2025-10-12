@@ -65,6 +65,28 @@ To embed the ChatKit interface on any page or post, simply use the shortcode:
 
 The chat interface will appear where you place the shortcode.
 
+### Customizing the Container Element
+
+By default, the shortcode creates a `<div>` element with the ID `chatkit-container` where the ChatKit widget will be mounted. You can customize this container ID using the `container_id` attribute:
+
+```
+[chatkit container_id="my-custom-chat"]
+```
+
+**Important Notes about Container Elements:**
+- The container element is a standard HTML div that you control via the shortcode
+- The OpenAI ChatKit SDK mounts its widget inside this container element
+- The ChatKit SDK handles all internal rendering, which may include:
+  - Custom elements (potentially named like `chatkit-widget`, etc.)
+  - Shadow DOM components
+  - Internal iframe elements
+- You only need to manage the outer container element; the SDK handles everything inside it
+- If you customize the container ID, ensure your custom CSS targets the correct ID
+
+### Shortcode Attributes
+
+- `container_id` (optional): Custom HTML ID for the container element. Default: `chatkit-container`
+
 ## Files Structure
 
 ```
@@ -133,7 +155,8 @@ This is a private project and not open source.
 
 1. **Check if the shortcode is present:**
    - Ensure you've added `[chatkit]` to your page/post
-   - Check the page source to verify the `chatkit-container` div is present
+   - Check the page source to verify the container div is present (default ID: `chatkit-container`, or your custom ID if specified)
+   - If using a custom container ID, verify it matches in both the shortcode and any custom CSS
 
 2. **Verify configuration:**
    - Go to Settings > Beepi ChatKit in WordPress admin
@@ -145,7 +168,7 @@ This is a private project and not open source.
    - Look for error messages in the Console tab
    - Common errors:
      - "Configuration not found" - WordPress localization issue
-     - "Container element not found" - Shortcode not rendering
+     - "Container element with ID '...' not found" - Shortcode not rendering or ID mismatch
      - "ChatKit SDK not loaded" or "ChatKit SDK failed to load after 5 seconds" - SDK loading issue (check CDN availability)
      - "Failed to get client secret" - API endpoint issue
 
