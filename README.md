@@ -146,6 +146,7 @@ This is a private project and not open source.
    - Common errors:
      - "Configuration not found" - WordPress localization issue
      - "Container element not found" - Shortcode not rendering
+     - "ChatKit SDK not loaded" or "ChatKit SDK failed to load after 5 seconds" - SDK loading issue (check CDN availability)
      - "Failed to get client secret" - API endpoint issue
 
 4. **Verify Cloudflare Worker endpoints:**
