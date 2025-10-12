@@ -148,6 +148,10 @@ This is a private project and not open source.
      - "Container element not found" - Shortcode not rendering
      - "ChatKit SDK not loaded" or "ChatKit SDK failed to load after 5 seconds" - SDK loading issue (check CDN availability)
      - "Failed to get client secret" - API endpoint issue
+     - "setOptions is not a function" - SDK not fully loaded, wait for custom element registration
+   - Success messages to look for:
+     - "Custom element defined, initializing..." - SDK loaded successfully
+     - "Initialized successfully with web component." - Configuration applied
 
 4. **Verify Cloudflare Worker endpoints:**
    - Test the start endpoint: `POST https://chatkit.beepi.no/api/chatkit/start`
