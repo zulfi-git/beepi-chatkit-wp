@@ -24,4 +24,4 @@ These technical documents provide:
 - Future enhancement roadmap
 - Implementation guidelines
 
-All assessments reflect the current state of the plugin (v1.3.0) and are maintained as the plugin evolves.
+All assessments reflect the current state of the plugin (v1.4.0) and are maintained as the plugin evolves.

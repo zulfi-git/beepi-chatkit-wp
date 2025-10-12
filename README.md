@@ -6,7 +6,7 @@ A WordPress plugin for embedding an OpenAI ChatKit agent on WordPress pages usin
 
 This plugin allows you to easily embed a ChatKit-powered chat interface on your WordPress site. It connects to your Cloudflare Worker endpoints for secure token generation and refresh, ensuring seamless authentication with the OpenAI ChatKit service.
 
-**New in v1.3.0:** Improved documentation organization with dedicated docs folder.
+**New in v1.4.0:** Real-time health monitoring of Cloudflare Worker service with visual status indicators.
 
 ## Quick Start
 
@@ -208,6 +208,16 @@ For issues and questions:
   - Steps to reproduce
 
 ## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for complete version history.
+
+### 1.4.0 (2025-10-12)
+- Added Worker health status display in admin settings page
+- Real-time health monitoring with AJAX refresh
+- Visual indicators for worker status (OK/Error)
+- Version information display
+- New admin JavaScript and CSS for health status functionality
+- Enhanced security with nonce verification for AJAX requests
 
 ### 1.3.0 (2025-10-11)
 - Created `/docs` directory for better documentation organization

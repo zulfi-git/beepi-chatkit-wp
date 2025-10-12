@@ -7,10 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-- Removed uptime field from health endpoint response (not meaningful in stateless serverless context)
-- Updated health status display to show only status and version
-- Removed `formatUptime()` function from admin JavaScript
+## [1.4.0] - 2025-10-12
 
 ### Added
 - Worker health status display in admin settings page
@@ -23,6 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New admin CSS (`admin-health.css`) for health status styling
 - AJAX handler with security nonce validation
 - Health check function using WordPress HTTP API
+
+### Changed
+- Removed uptime field from health endpoint response (not meaningful in stateless serverless context)
+- Updated health status display to show only status and version
+- Removed `formatUptime()` function from admin JavaScript
 
 ### Security
 - AJAX requests protected with WordPress nonce verification
