@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Updated shortcode to render `<openai-chatkit>` element directly instead of wrapper div
+- Simplified initialization to configure existing element rather than creating and appending new one
+- Updated documentation to reflect direct use of openai-chatkit web component
+
 ### Fixed
 - Corrected ChatKit custom element name from 'chatkit-widget' to 'openai-chatkit'
 - Resolved ChatKit SDK initialization failure caused by waiting for incorrect custom element name

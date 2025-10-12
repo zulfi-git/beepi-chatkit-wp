@@ -95,12 +95,12 @@
 	 * Initialize the ChatKit instance.
 	 * 
 	 * This function sets up the ChatKit interface by:
-	 * 1. Validating configuration and DOM elements
-	 * 2. Creating the ChatKit web component
-	 * 3. Configuring token generation via getClientSecret function
+	 * 1. Validating configuration
+	 * 2. Finding the openai-chatkit web component
+	 * 3. Configuring it via getClientSecret property
 	 * 
-	 * ChatKit uses Web Components, so we create the element and configure it
-	 * via properties rather than using a global API.
+	 * The openai-chatkit element should already exist in the DOM
+	 * (rendered by the shortcode), and we configure it here.
 	 * 
 	 * @returns {void}
 	 */
@@ -111,18 +111,15 @@
 			return;
 		}
 
-		// Ensure the container element exists.
-		const container = document.getElementById('chatkit-container');
-		if (!container) {
-			console.error('Beepi ChatKit: Container element not found.');
+		// Find the openai-chatkit element that was rendered by the shortcode
+		const chatkitWidget = document.getElementById('chatkit-container');
+		if (!chatkitWidget) {
+			console.error('Beepi ChatKit: openai-chatkit element not found.');
 			return;
 		}
 
 		// Initialize ChatKit with configuration using Web Components.
 		try {
-			// Create the openai-chatkit element
-			const chatkitWidget = document.createElement('openai-chatkit');
-			
 			// Define the getClientSecret function that the widget will call
 			chatkitWidget.getClientSecret = async function(currentClientSecret) {
 				try {
@@ -165,9 +162,6 @@
 			if (beepichatKitConfig.workflowId) {
 				chatkitWidget.setAttribute('workflow-id', beepichatKitConfig.workflowId);
 			}
-			
-			// Append the widget to the container
-			container.appendChild(chatkitWidget);
 
 			console.log('Beepi ChatKit: Initialized successfully with web component.');
 		} catch (error) {
