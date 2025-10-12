@@ -137,6 +137,30 @@ array( __CLASS__, 'refresh_url_callback' ),
 'beepi-chatkit-settings',
 'beepi_chatkit_main'
 );
+
+add_settings_field(
+'start_screen_greeting',
+'Start Screen Greeting',
+array( __CLASS__, 'start_screen_greeting_callback' ),
+'beepi-chatkit-settings',
+'beepi_chatkit_main'
+);
+
+add_settings_field(
+'start_screen_prompt_label',
+'Start Screen Prompt Label',
+array( __CLASS__, 'start_screen_prompt_label_callback' ),
+'beepi-chatkit-settings',
+'beepi_chatkit_main'
+);
+
+add_settings_field(
+'start_screen_prompt_text',
+'Start Screen Prompt Text',
+array( __CLASS__, 'start_screen_prompt_text_callback' ),
+'beepi-chatkit-settings',
+'beepi_chatkit_main'
+);
 }
 
 /**
@@ -177,6 +201,36 @@ echo '<p class="description">Cloudflare Worker endpoint for token refresh</p>';
 }
 
 /**
+ * Start Screen Greeting field callback.
+ */
+public static function start_screen_greeting_callback() {
+$options = get_option( 'beepi_chatkit_options' );
+$value   = isset( $options['start_screen_greeting'] ) ? $options['start_screen_greeting'] : 'How can I help you today?';
+echo '<input type="text" name="beepi_chatkit_options[start_screen_greeting]" value="' . esc_attr( $value ) . '" class="regular-text" />';
+echo '<p class="description">The greeting message shown on the chat start screen</p>';
+}
+
+/**
+ * Start Screen Prompt Label field callback.
+ */
+public static function start_screen_prompt_label_callback() {
+$options = get_option( 'beepi_chatkit_options' );
+$value   = isset( $options['start_screen_prompt_label'] ) ? $options['start_screen_prompt_label'] : 'Get Started';
+echo '<input type="text" name="beepi_chatkit_options[start_screen_prompt_label]" value="' . esc_attr( $value ) . '" class="regular-text" />';
+echo '<p class="description">The label for the prompt button on the start screen</p>';
+}
+
+/**
+ * Start Screen Prompt Text field callback.
+ */
+public static function start_screen_prompt_text_callback() {
+$options = get_option( 'beepi_chatkit_options' );
+$value   = isset( $options['start_screen_prompt_text'] ) ? $options['start_screen_prompt_text'] : 'Hi! How can you assist me today?';
+echo '<input type="text" name="beepi_chatkit_options[start_screen_prompt_text]" value="' . esc_attr( $value ) . '" class="regular-text" />';
+echo '<p class="description">The prompt text sent when the start screen button is clicked</p>';
+}
+
+/**
  * Sanitize settings input.
  *
  * @param array $input Raw input from the form.
@@ -195,6 +249,18 @@ $output['start_url'] = esc_url_raw( $input['start_url'] );
 
 if ( isset( $input['refresh_url'] ) ) {
 $output['refresh_url'] = esc_url_raw( $input['refresh_url'] );
+}
+
+if ( isset( $input['start_screen_greeting'] ) ) {
+$output['start_screen_greeting'] = sanitize_text_field( $input['start_screen_greeting'] );
+}
+
+if ( isset( $input['start_screen_prompt_label'] ) ) {
+$output['start_screen_prompt_label'] = sanitize_text_field( $input['start_screen_prompt_label'] );
+}
+
+if ( isset( $input['start_screen_prompt_text'] ) ) {
+$output['start_screen_prompt_text'] = sanitize_text_field( $input['start_screen_prompt_text'] );
 }
 
 return $output;
