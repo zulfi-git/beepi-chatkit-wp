@@ -169,7 +169,7 @@ This is a well-structured, lightweight WordPress plugin that successfully implem
 
 #### 1.2 Improve Documentation
 - Add inline documentation for complex logic
-- Create `CONTRIBUTING.md` (if planning to open-source)
+- Create `CONTRIBUTING.md` for contribution guidelines
 - Add troubleshooting section to README
 
 #### 1.3 Code Quality
