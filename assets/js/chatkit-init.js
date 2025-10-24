@@ -120,11 +120,6 @@
 
 		// Initialize ChatKit with configuration using Web Components.
 		try {
-			// Add workflow ID if configured
-			if (beepichatKitConfig.workflowId) {
-				chatkitWidget.setAttribute('workflow-id', beepichatKitConfig.workflowId);
-			}
-
 			// Build the theme configuration object dynamically
 			const chatkitConfig = {
 				api: {
@@ -197,8 +192,16 @@
 				}
 			};
 
-			// Configure ChatKit using setOptions() method
+			// IMPORTANT: setOptions() must be called before setting workflow-id.
+			// Setting workflow-id triggers ChatKit initialization, which requires
+			// the api.getClientSecret function to be configured first to ensure
+			// proper authentication via Cloudflare Worker.
 			chatkitWidget.setOptions(chatkitConfig);
+
+			// Add workflow ID if configured (this triggers ChatKit initialization)
+			if (beepichatKitConfig.workflowId) {
+				chatkitWidget.setAttribute('workflow-id', beepichatKitConfig.workflowId);
+			}
 
 			console.log('Beepi ChatKit: Initialized successfully with web component.');
 		} catch (error) {
