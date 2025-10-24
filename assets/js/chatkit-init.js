@@ -192,11 +192,10 @@
 				}
 			};
 
-			// IMPORTANT: Configure ChatKit using setOptions() BEFORE setting workflow-id.
-			// Setting the workflow-id attribute triggers ChatKit initialization, so the
-			// api.getClientSecret function must be configured first to ensure proper
-			// authentication via Cloudflare Worker. Otherwise, ChatKit will attempt
-			// direct API calls to OpenAI without authentication, resulting in 401 errors.
+			// IMPORTANT: setOptions() must be called before setting workflow-id.
+			// Setting workflow-id triggers ChatKit initialization, which requires
+			// the api.getClientSecret function to be configured first to ensure
+			// proper authentication via Cloudflare Worker.
 			chatkitWidget.setOptions(chatkitConfig);
 
 			// Add workflow ID if configured (this triggers ChatKit initialization)
