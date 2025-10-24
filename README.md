@@ -75,10 +75,10 @@ All settings are stored securely in the WordPress database.
    - Ensure the Worker endpoints (`/api/chatkit/start` and `/api/chatkit/refresh`) are properly implemented
    - Test the Worker health endpoint to verify it's operational
 
-4. **Security benefits**:
-   - API keys never exposed to the browser
-   - API keys never stored in WordPress database
-   - All authentication handled server-side by Cloudflare Worker
+**Security benefits**:
+- API keys never exposed to the browser
+- API keys never stored in WordPress database
+- All authentication handled server-side by Cloudflare Worker
 
 ## Usage
 
