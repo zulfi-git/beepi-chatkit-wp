@@ -58,6 +58,28 @@ Configure the following settings:
 
 All settings are stored securely in the WordPress database.
 
+### Token Management Setup
+
+**Important**: This plugin uses a secure token management approach:
+
+1. **Cloudflare Worker handles authentication**: The plugin never directly communicates with OpenAI's API. All authentication is managed by your Cloudflare Worker.
+
+2. **Token flow**:
+   - Plugin requests tokens from the Cloudflare Worker (`/api/chatkit/start` and `/api/chatkit/refresh`)
+   - Worker securely stores the OpenAI API key and generates tokens
+   - Worker returns tokens to the plugin
+   - Plugin passes tokens to the ChatKit SDK for authentication
+
+3. **Required setup on Cloudflare Worker**:
+   - Configure your OpenAI API key as a secret in the Cloudflare Worker
+   - Ensure the Worker endpoints (`/api/chatkit/start` and `/api/chatkit/refresh`) are properly implemented
+   - Test the Worker health endpoint to verify it's operational
+
+4. **Security benefits**:
+   - API keys never exposed to the browser
+   - API keys never stored in WordPress database
+   - All authentication handled server-side by Cloudflare Worker
+
 ## Usage
 
 To embed the ChatKit interface on any page or post, simply use the shortcode:
@@ -191,18 +213,25 @@ This is a private project and not open source.
 
 ### API errors
 
-**"Failed to get client secret: 401"**
-- Check your Cloudflare Worker authentication
-- Verify API credentials are correct
+**"Failed to get client secret: 401" or "401 Unauthorized"**
+- **Most Common Cause**: The Cloudflare Worker is not properly configured with the OpenAI API key
+- **Solution**: Ensure your Cloudflare Worker has the correct OpenAI API key configured as a secret
+- The plugin correctly routes all authentication through the Cloudflare Worker - direct calls to OpenAI's API are not made
+- Verify the Worker endpoints are accessible and returning valid tokens:
+  - Start endpoint: `POST https://chatkit.beepi.no/api/chatkit/start`
+  - Refresh endpoint: `POST https://chatkit.beepi.no/api/chatkit/refresh`
+- Test the Worker health endpoint: `GET https://chatkit.beepi.no/api/health`
 
 **"Failed to refresh client secret: 403"**
 - Check token refresh endpoint permissions
 - Verify the refresh logic in Cloudflare Worker
+- Ensure the Worker is properly handling the `currentClientSecret` parameter
 
 **Network errors**
 - Check internet connectivity
-- Verify Cloudflare Worker is running
+- Verify Cloudflare Worker is running and accessible
 - Check for CORS issues in browser console
+- Use browser DevTools Network tab to inspect requests to the Worker endpoints
 
 ### Performance issues
 
